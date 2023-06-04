@@ -1,7 +1,8 @@
 import os
 import sys
 import threading
-import webbrowser
+import magic
+import platform
 import tempfile
 import tkinter as tk
 from tkinter import filedialog, messagebox
@@ -248,16 +249,53 @@ class Application:
         if file_bytes is not None:
             # Get the file type
             file_type = magic.from_buffer(file_bytes.getvalue(), mime=True)
+            # special case MIME type to extension mapping
+            type_extension_mapping = {
+                "application/vnd.ms-excel": "xls",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": "xlsx",
+                "application/vnd.ms-powerpoint": "ppt",
+                "application/vnd.openxmlformats-officedocument.presentationml.presentation": "pptx",
+                "text/plain": "txt",
+                "application/rtf": "rtf",
+                "text/rtf": "rtf",
+                "text/csv": "csv",
+                "application/vnd.ms-outlook": "msg",
+                "application/json": "json",
+                "application/xml": "xml",
+                "text/xml": "xml",
+                "application/vnd.oasis.opendocument.text": "odt",
+                "application/vnd.oasis.opendocument.spreadsheet": "ods",
+                "application/vnd.oasis.opendocument.presentation": "odp",
+                "image/bmp": "bmp",
+                "image/gif": "gif",
+                "image/x-icon": "ico",
+                "image/svg+xml": "svg",
+                "image/tiff": "tif",
+                "audio/mpeg": "mp3",
+                "video/mp4": "mp4",
+                "application/zip": "zip",
+                "application/x-rar-compressed": "rar",
+                "text/html": "html",
+                # Add more mappings as needed in the future
+            }
+
+            # Get the extension from the MIME type
+            extension = type_extension_mapping.get(file_type, file_type.split('/')[-1])
 
             # Save the file to a temporary location
-            with tempfile.NamedTemporaryFile(delete=False, suffix='.' + file_type.split('/')[-1]) as temp_file:
+            with tempfile.NamedTemporaryFile(delete=False, suffix='.' + extension) as temp_file:
                 temp_file.write(file_bytes.getvalue())
 
             try:
                 # Open the file using the appropriate application
-                webbrowser.open(temp_file.name)
+                if platform.system() == 'Windows':
+                    os.startfile(temp_file.name)
+                elif platform.system() == 'Darwin':  # MacOS
+                    subprocess.call(('open', temp_file.name))
+                else:  # linux variants
+                    subprocess.call(('xdg-open', temp_file.name))
             except Exception as e:
-                messagebox.showerror("Error:", "File failed to open.")
+                messagebox.showerror("Error:", "File failed to open: " + str(e))
 
         else:
             messagebox.showerror("Error:", "Failed to retrieve file from IPFS.")

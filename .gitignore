@@ -1,0 +1,43 @@
+# Project-specific ignores
+.idea/
+__pycache__/
+build/
+ipfs_helper/
+venv/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Editors and IDEs
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+*.komodotools
+*.kate-swp
+*.kate-swp
+*.swp
+*.swo
+*.tmproj
+
+# Dependency directories
+/node_modules/
+/bower_components/
+
+# Compiled files
+*.pyc
+*.pyo
+*.pyd
+*.class
+*.o
+*.so
+*.dll
+
+# Log files
+*.log
+logs/
+log.txt
+
+# PyInstaller spec file
+*.spec

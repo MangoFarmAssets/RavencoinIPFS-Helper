@@ -6,13 +6,15 @@ RavencoinIPFS Helper is a drag and drop IPFS helper tool specifically designed f
 
 Before you can use RavencoinIPFS Helper, you need to install the following:
 
-1. **Python 3:** Make sure you have Python 3 installed on your system. If you don't have it, you can download it from the official Python website: [Python Downloads](https://www.python.org/downloads/)
+1. **Python 3:** Make sure you have Python 3 installed on your system. If you don't have it, you can download it from the official Python website: [Python Downloads](https://www.python.org/downloads/).
 
 2. **IPFS:** Download and install IPFS on your machine. We recommend using ipfs-update for managing IPFS updates. You can find pre-built binaries for IPFS on the [IPFS Distribution page](https://dist.ipfs.tech/#ipfs-update) and the source code on the [IPFS GitHub repository](https://github.com/ipfs/ipfs-update).
 
 ## RavencoinIPFS Helper Installation
 
-To use the RavencoinIPFS_Helper repository, follow these steps:
+On Windows, you can use the executable file in [Releases](https://github.com/MangoFarmAssets/RavencoinIPFS-Helper/releases) to try out the RavencoinIPFS Helper.
+
+To build from the RavencoinIPFS_Helper repository, follow these steps:
 
 1. Clone the repository to your local machine using the following command:
 

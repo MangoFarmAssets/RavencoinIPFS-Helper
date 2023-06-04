@@ -41,3 +41,6 @@ log.txt
 
 # PyInstaller spec file
 *.spec
+
+# Compiled output
+/dist/
